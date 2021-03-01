@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Couchbase.LoadTester", "SignalR.Couchbase.LoadTester\SignalR.Couchbase.LoadTester.csproj", "{D2953A63-017B-45CD-B45C-20B067D246D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2953A63-017B-45CD-B45C-20B067D246D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2953A63-017B-45CD-B45C-20B067D246D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2953A63-017B-45CD-B45C-20B067D246D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2953A63-017B-45CD-B45C-20B067D246D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2612C78-A147-4AFE-8C51-1B65F04EE0C1}
+	EndGlobalSection
+EndGlobal

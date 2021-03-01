@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Nuget.SignalR.Couchbase</id>
+    <version>1.0.0</version>
+    <authors>Couchbase</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <description>.NET Nuget package to enable SignalR scaleout using Couchbase as backing store</description>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>2021 Couchbase, Inc.</copyright>
+    <tags>Couchbase SignalR</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="SampleDependency" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
