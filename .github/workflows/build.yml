@@ -1,0 +1,42 @@
+name: Build CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ['3.1.x']
+    steps:
+      - name: Free disk space
+        run: |
+         sudo rm -rf "/usr/local/share/boost"
+         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+         sudo apt-get clean
+         df -h
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          notification_title: "TEST - {workflow} has {status_message} - {repo_url}"
+          message_format: "TEST - {emoji} *{workflow}* {status_message} in <{repo_url}|{repo}@{branch}>"
+          notify_when: "success,failure,cancelled,warnings"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.DA_SLACK_WEBHOOK_URL }}
