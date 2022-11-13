@@ -26,10 +26,10 @@ jobs:
         run: nuget restore SignalR.Couchbase.sln
 
       - name: Build code base
-        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj /t:Rebuild
+        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj /t:Rebuild /p:TargetFrameworkVersion=v$env:4.7.2
 
       - name: Build Sample
-        run: msbuild Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj /t:Rebuild
+        run: msbuild Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj /t:Rebuild /p:TargetFrameworkVersion=v$env:4.7.2
 
       - name: Run Tests
         run: dotnet test Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj --no-restore --verbosity normal
