@@ -21,11 +21,12 @@ jobs:
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
-        with:
-          vswhere-path: 'C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2'
+
+      - name: Restore NuGet Packages
+        run: nuget restore src/SignalR.Couchbase/SignalR.Couchbase.csproj
 
       - name: Build
-        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj /t:Rebuild
 
       - name: Publish Web App
         uses: ravsamhq/notify-slack-action@v2
