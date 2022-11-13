@@ -31,8 +31,11 @@ jobs:
       - name: Build Sample
         run: msbuild Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj /t:Rebuild /p:TargetFrameworkVersion=4.7.2
 
+      - name: Build Tests
+        run: msbuild tests/SignalR.Couchbase.Tests/SignalR.Couchbase.Tests.csproj /t:Rebuild /p:TargetFrameworkVersion=4.7.2
+
       - name: Run Tests
-        run: dotnet test Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj --no-restore --verbosity normal
+        run: dotnet test tests/SignalR.Couchbase.Tests/SignalR.Couchbase.Tests.csproj --no-restore --verbosity normal
 
       - name: Publish Web App
         uses: ravsamhq/notify-slack-action@v2
