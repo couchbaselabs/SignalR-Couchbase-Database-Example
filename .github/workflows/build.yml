@@ -23,7 +23,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build
-        run: msbuild src/SignalR.Couchbase.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
 
       - name: Publish Web App
         uses: ravsamhq/notify-slack-action@v2
