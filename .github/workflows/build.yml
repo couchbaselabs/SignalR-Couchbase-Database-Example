@@ -23,7 +23,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Restore NuGet Packages
-        run: nuget restore src/SignalR.Couchbase/SignalR.Couchbase.csproj
+        run: nuget restore -SolutionDirectory src/SignalR.Couchbase/SignalR.Couchbase.csproj
 
       - name: Build
         run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj /t:Rebuild
