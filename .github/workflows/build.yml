@@ -9,34 +9,41 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ['3.1.x']
+    runs-on: windows-latest
     steps:
-      - name: Free disk space
-        run: |
-         sudo rm -rf "/usr/local/share/boost"
-         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-         sudo apt-get clean
-         df -h
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
-      - uses: ravsamhq/notify-slack-action@v2
+        name: Checkout Code
+       
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Restore NuGet Packages
+        run: nuget restore SignalR.Couchbase.sln
+
+      - name: Build code base
+        run: msbuild src/SignalR.Couchbase/SignalR.Couchbase.csproj /t:Rebuild /p:TargetFrameworkVersion=4.7.2
+
+      - name: Build Sample
+        run: msbuild Sample/CouchbaseSignalRChat/CouchbaseSignalRChat.csproj /t:Rebuild /p:TargetFrameworkVersion=4.7.2
+
+      - name: Build Tests
+        run: msbuild tests/SignalR.Couchbase.Tests/SignalR.Couchbase.Tests.csproj /t:Rebuild /p:TargetFrameworkVersion=4.7.2
+
+      - name: Run Tests
+        run: dotnet test tests/SignalR.Couchbase.Tests/SignalR.Couchbase.Tests.csproj --no-restore --verbosity normal
+
+      - name: Publish Web App
+        uses: ravsamhq/notify-slack-action@v2
         if: always()
         with:
           status: ${{ job.status }}
           notification_title: "TEST - {workflow} has {status_message} - {repo_url}"
-          message_format: "TEST - {emoji} *{workflow}* {status_message} in <{repo_url}|{repo}@{branch}>"
+          message_format: "TEST - {semoji} *{workflow}* {status_message} in <{repo_url}|{repo}@{branch}>"
           notify_when: "success,failure,cancelled,warnings"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.DA_SLACK_WEBHOOK_URL }}
