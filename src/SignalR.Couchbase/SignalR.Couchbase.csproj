@@ -33,8 +33,8 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Couchbase.NetClient, Version=3.0.6.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CouchbaseNetClient.3.0.6\lib\netstandard2.0\Couchbase.NetClient.dll</HintPath>
+    <Reference Include="Couchbase.NetClient, Version=3.4.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CouchbaseNetClient.3.4.0\lib\netstandard2.0\Couchbase.NetClient.dll</HintPath>
     </Reference>
     <Reference Include="DnsClient, Version=1.3.2.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DnsClient.1.3.2\lib\net471\DnsClient.dll</HintPath>
