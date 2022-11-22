@@ -7,6 +7,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: "59 23 * * SAT"
 jobs:
   build:
     runs-on: windows-latest
